@@ -18,8 +18,9 @@ namespace MauiApp3.Service
         _httpClient = new HttpClient();
     }
 
-    // GET /posts
-    public async Task<List<PostRecord>> GetPostsAsync()
+       
+        // GET /posts
+        public async Task<List<PostRecord>> GetPostsAsync()
     {
         var response = await _httpClient.GetStringAsync($"{BaseUrl}/posts");
         return JsonConvert.DeserializeObject<List<PostRecord>>(response);
