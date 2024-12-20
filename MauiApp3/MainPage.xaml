@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.MainPage"
+             Title="Posts Management">
+
+    <VerticalStackLayout Padding="20">
+
+        <!-- Create Post -->
+        <Label Text="Create New Post" FontSize="Large" FontAttributes="Bold" />
+        <Entry Placeholder="Title" Text="{Binding NewPostTitle}" />
+        <Entry Placeholder="Body" Text="{Binding NewPostBody}" />
+        <Button Text="Add Post" Command="{Binding CreatePostCommand}" />
+
+        <BoxView HeightRequest="1" BackgroundColor="Gray" Margin="0,10,0,10" />
+
+        <!-- Posts List -->
+        <Label Text="Posts List" FontSize="Large" FontAttributes="Bold" />
+        <CollectionView ItemsSource="{Binding Posts}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedPost}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="Medium" />
+                            <Label Text="{Binding Body}" FontSize="Small" LineBreakMode="WordWrap" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <BoxView HeightRequest="1" BackgroundColor="Gray" Margin="0,10,0,10" />
+
+        <!-- Update / Delete Post -->
+        <Label Text="Edit Selected Post" FontSize="Large" FontAttributes="Bold" />
+        <Entry Placeholder="Edit Title" Text="{Binding SelectedPost.Title}" />
+        <Entry Placeholder="Edit Body" Text="{Binding SelectedPost.Body}" />
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Update Post" Command="{Binding UpdatePostCommand}" IsEnabled="{Binding IsPostSelected}" />
+            <Button Text="Delete Post" Command="{Binding DeletePostCommand}" IsEnabled="{Binding IsPostSelected}" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
